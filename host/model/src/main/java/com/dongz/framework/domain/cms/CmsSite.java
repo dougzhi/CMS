@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Data
 @ToString
-@Document(collection = "cms_site")
+@Document(collection = "site")
 public class CmsSite {
 
     //站点ID

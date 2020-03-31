@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Data
 @ToString
-@Document(collection = "cms_config")
+@Document(collection = "config")
 public class CmsConfig {
 
     @Id

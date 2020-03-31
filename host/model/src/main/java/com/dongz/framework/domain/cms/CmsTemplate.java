@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @ToString
-@Document(collection = "cms_template")
+@Document(collection = "template")
 public class CmsTemplate {
 
     //站点ID
