@@ -19,16 +19,15 @@ public class Swagger2Configuration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.xuecheng"))
+                .apis(RequestHandlerSelectors.basePackage("com.dongz"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("学成网api文档")
-                .description("学成网api文档")
-//                .termsOfServiceUrl("/")
+                .title("Cms api文档")
+                .description("Cms api文档")
                 .version("1.0")
                 .build();
     }
