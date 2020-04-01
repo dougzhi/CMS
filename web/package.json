@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --mode development",
+    "serve": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "test": "vue-cli-service serve --mode test",
     "prod": "vue-cli-service serve --mode production",
     "build:dev": "vue-cli-service build --mode development",
