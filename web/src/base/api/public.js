@@ -1,9 +1,16 @@
 require('es6-promise').polyfill()
+import config from "../../config/index";
 import axios from 'axios'
 
+
+const BaseURL = config.baseUrl
+
+axios.defaults.baseURL = BaseURL
 axios.defaults.withCredentials = true //跨域
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded'
+console.log(BaseURL)
+debugger
 import utils from '../../common/utils'
 // if(utils.getJwt()){
 //   axios.defaults.headers['Authorization'] = 'Bearer '+utils.getJwt()

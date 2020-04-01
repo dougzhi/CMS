@@ -15,7 +15,7 @@ export default {
   methods: {
 
     },
-  created: function(newPath) {
+  created: function() {
   }
 }
 </script>

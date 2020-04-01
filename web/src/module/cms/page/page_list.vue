@@ -12,7 +12,7 @@
         </el-select>
         <el-button type="primary" v-on:click="query" size="small">查询</el-button>
         <router-link class="mui-tab-item" :to="{path:'/cms/page/add/',query:{
-          page: this.params.page,
+          page: this.page,
           siteId: this.params.siteId}}">
           <el-button  type="primary" size="small">新增页面</el-button>
         </router-link>
@@ -70,8 +70,8 @@
     <!--分页-->
     <el-col :span="24" class="toolbar">
 
-      <el-pagination background layout="prev, pager, next" @current-change="changePage" :page-size="this.params.size"
-                     :total="total" :current-page="this.params.page"
+      <el-pagination background layout="prev, pager, next" @current-change="changePage" :page-size="this.size"
+                     :total="total" :current-page="this.page"
                      style="float:right;">
       </el-pagination>
     </el-col>
@@ -83,9 +83,9 @@
   export default{
     data(){
       return {
+        page:1,//页码
+        size:2,//每页显示个数
         params:{
-          page:1,//页码
-          size:2,//每页显示个数
           siteId:''//站点id
         },
         listLoading:false,
@@ -105,7 +105,7 @@
       generateHtml (id) {
 //        console.log(id)
         this.$router.push({ path: '/cms/page/html/'+id, query:{
-          page: this.params.page,
+          page: this.page,
           siteId: this.params.siteId}})
       },
       postPage (id) {
@@ -127,7 +127,7 @@
       },
       edit(pageId){
         this.$router.push({ path: '/cms/page/edit/'+pageId,query:{
-          page: this.params.page,
+          page: this.page,
           siteId: this.params.siteId}})
       },
       //删除
@@ -152,11 +152,11 @@
         });
       },
       changePage(page){
-        this.params.page = page;
+        this.page = page;
         this.query()
       },
       query(){
-        cmsApi.page_list(this.params.page,this.params.size,this.params).then((res)=>{
+        cmsApi.page_list(this.page,this.size,this.params).then((res)=>{
           console.log(res)
           this.total = res.queryResult.total
           this.list = res.queryResult.list
@@ -166,9 +166,9 @@
     created(){
         //存储 请求参数
       /*if(this.$route.query.page){
-       this.params.page = Number.parseInt(this.$route.query.page)
+       this.page = Number.parseInt(this.$route.query.page)
        }*/
-      this.params.page = Number.parseInt(this.$route.query.page||1);
+      this.page = Number.parseInt(this.$route.query.page||1);
       this.params.siteId = this.$route.query.siteId||'';
     },
     mounted() {

@@ -57,15 +57,77 @@ module.exports = {
     port: '8080', // 代理端口
     open: true, // 项目启动时是否自动打开浏览器
     proxy: {
-      '/api': {
-            target: 'http://localhost:31001',
+      '/banner': {
+        // target: 'http://localhost:3000/mock/11'
+        target: 'http://127.0.0.1:7777'
+
+      },
+      '/api/cms': {
+        target: 'http://localhost:31001/api/cms',
         changeOrigin: true,
-        ws: true, // proxy websockets
-        secure: true // 设置支持https协议的代理
-        // pathRewrite: {      //重写路径
-        //     '^/travelPortal': '/travelPortal'
-        // }
-      }
+        pathRewrite: {
+          '^/api/cms': ''
+        }
+        //target: 'http://127.0.0.1:50201'
+      },
+
+      /*,
+      '/ucenter': {
+        // target: 'http://localhost:3000/mock/11'
+        //target: 'http://127.0.0.1:31200'
+        target: 'http://127.0.0.1:50201'
+
+      },
+      '/auth': {
+        // target: 'http://localhost:3000/mock/11'
+        //target: 'http://127.0.0.1:31200'
+        target: 'http://127.0.0.1:50201/api'
+
+      },
+      '/course': {
+        // target: 'http://localhost:3000/mock/11'
+        //target: 'http://127.0.0.1:31200'
+        target: 'http://127.0.0.1:50201/api'
+
+      },
+      '/media': {//媒资管理
+        //target: 'http://127.0.0.1:31400'
+        target: 'http://127.0.0.1:50201'
+      },
+
+      '/cms/!*': {//cms管理
+        //target: 'http://127.0.0.1:31001'
+        target: 'http://127.0.0.1:50201'
+
+      },
+
+
+      '/filesystem/!*': {//文件系统管理
+        //target: 'http://127.0.0.1:22100'
+        target: 'http://127.0.0.1:50201'
+
+      },
+      '/category/!*': {//分类管理
+        // target: 'http://127.0.0.1:3000/mock/11'
+        //target: 'http://127.0.0.1:31200'
+        target: 'http://127.0.0.1:50201'
+
+      },
+      '/sys/!*': {//系统管理
+        //target: 'http://127.0.0.1:31001'
+        target: 'http://127.0.0.1:50201'
+
+      },*/
+      /*'/static/!*': {//系统管理
+        //target: 'http://127.0.0.1:31001'
+        target: 'http://127.0.0.1'
+
+      },
+      '/group1/*': {//系统管理
+        // target: 'http://127.0.0.1:3000/mock/11'
+        target: 'http://192.168.101.64'
+
+      }*/
     }
   }
   // before: app => {}

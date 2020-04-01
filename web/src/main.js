@@ -1,26 +1,38 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import App from './App.vue'
-import './plugins/element.js'
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import VueRouter from 'vue-router'
 import routes from '../src/base/router'
 import store from '../src/vuex/store'
-import Vuex from 'vuex'
+import config from "./config/index";
+import axios from 'axios'
+
+// import { Message } from 'element-ui';
 // import utilApi from '../src/common/utils';
 // import Mock from './mock'
-// Mock.bootstrap();
-
 //  将vue-resource在vue中绑定，自动在vue对象实例上注入一个$http对象就可以使用ajax方法了
 // import vueResource from 'vue-resource';
 // let Base64 = require('js-base64').Base64;
 // let openAuthenticate = sysConfig.openAuthenticate
 // let openAuthorize = sysConfig.openAuthorize
 
-
+// Mock.bootstrap();
+Vue.use(Element)
 Vue.config.productionTip = false
 
 // 在Vue中全局使用mintui
 Vue.use(Vuex)
+
 Vue.use(VueRouter)
+
+const BaseURL = config.baseUrl
+const timeout = 90 * 1000
+debugger
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+axios.defaults.baseURL = BaseURL
+axios.defaults.timeout = timeout
 
 // Vue.use(vueResource);
 /* eslint-disable no-new */
@@ -91,9 +103,6 @@ router.beforeEach((to, from, next) => {
 //   }
 //
 // });
-
-// import axios from 'axios'
-// import { Message } from 'element-ui';
 
 /*// 添加请求拦截器
 axios.interceptors.request.use(function (config) {
