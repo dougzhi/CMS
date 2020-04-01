@@ -1,0 +1,67 @@
+// git related info
+def git_auth = "7fd38124-e9bb-49be-a192-19c3ad3ec61e"
+
+// 公共
+def registry = "ccr.ccs.tencentyun.com"
+
+// 项目
+def project = "tengyun_credit-rating"
+def image_name = "${registry}/${project}/credit-evaluate-front:${build_env}-${BUILD_NUMBER}"
+
+pipeline
+{
+    agent any
+    stages {
+        stage("build front"){
+            steps{
+            sh "cd h5 && npm install && npm run build:${env.build_env}" 
+            }
+   
+        }
+    
+        stage("build images and push ")
+        {
+            steps{
+                sh "cp /usr/share/zoneinfo/Asia/Shanghai ./h5/"
+                sh """cd h5
+                        docker build -t ${image_name} .
+                        docker push ${image_name}
+                    """
+            }
+        }   
+    }
+    post{
+        failure{
+           emailext(
+               attachLog: true,
+               subject: "构建失败：${env.JOB_NAME}",
+               body: """<p> 
+                     环境：${build_env} <br>
+                     代码分支：${branch} <br>
+                     代码地址：${git_url} <br>
+                     镜像版本：${image_name} <br>
+                     详细日志见附件。<br>
+                     </p>
+                    """,
+               to: "alisli@yntengyun.com,elitisthu@yntengyun.com",
+               from: "teg-sys-notice@yntengyun.com",
+           )
+        }
+        success{
+           emailext(
+               subject: "构建成功：${env.JOB_NAME}",
+               body: """<p> 
+                     环境：${build_env} <br>
+                     代码分支：${branch} <br>
+                     代码地址：${git_url} <br>
+                     镜像版本：${image_name} <br>
+                     GIT_COMMIT: ${GIT_COMMIT}
+                     </p>
+                    """,
+               to: "alisli@yntengyun.com,elitisthu@yntengyun.com",
+               from: "teg-sys-notice@yntengyun.com",
+           )
+        }        
+
+    }
+}
