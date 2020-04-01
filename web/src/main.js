@@ -1,35 +1,28 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import App from './App.vue'
+import './plugins/element.js'
 import VueRouter from 'vue-router'
-
-import routes from '../../web/src/base/router'
-import store from '../../web/src/vuex/store'
+import routes from '../src/base/router'
+import store from '../src/vuex/store'
 import Vuex from 'vuex'
-import utilApi from '../../web/src/common/utils';
+// import utilApi from '../src/common/utils';
 // import Mock from './mock'
 // Mock.bootstrap();
+
+//  将vue-resource在vue中绑定，自动在vue对象实例上注入一个$http对象就可以使用ajax方法了
+// import vueResource from 'vue-resource';
+// let Base64 = require('js-base64').Base64;
+// let openAuthenticate = sysConfig.openAuthenticate
+// let openAuthorize = sysConfig.openAuthorize
 
 
 Vue.config.productionTip = false
 
 // 在Vue中全局使用mintui
-Vue.use(ElementUI)
 Vue.use(Vuex)
 Vue.use(VueRouter)
 
-
-//  将vue-resource在vue中绑定，自动在vue对象实例上注入一个$http对象就可以使用ajax方法了
-import vueResource from 'vue-resource';
-let Base64 = require('js-base64').Base64;
-let sysConfig = require('@/../config/sysConfig')
-let openAuthenticate = sysConfig.openAuthenticate
-let openAuthorize = sysConfig.openAuthorize
-
-Vue.use(vueResource);
+// Vue.use(vueResource);
 /* eslint-disable no-new */
 const router = new VueRouter({
   routes:routes
@@ -99,8 +92,8 @@ router.beforeEach((to, from, next) => {
 //
 // });
 
-import axios from 'axios'
-import { Message } from 'element-ui';
+// import axios from 'axios'
+// import { Message } from 'element-ui';
 
 /*// 添加请求拦截器
 axios.interceptors.request.use(function (config) {
@@ -134,11 +127,9 @@ axios.interceptors.response.use(data => {
   return data
 })*/
 
+
 new Vue({
-  el: '#app',
   router,
   store,
-  // template: '<App/>',
-  // components: { App }
-  render: c => c(App)
-})
+  render: h => h(App)
+}).$mount('#app')
