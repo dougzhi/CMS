@@ -111,7 +111,7 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="scss">
   .nav {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
@@ -155,6 +155,7 @@
   }
   }
   .logo {
+  //width:230px;
     height: 60px;
     font-size: 20px;
     padding-left: 0px;
@@ -187,6 +188,7 @@
   }
   .main {
     display: flex;
+  // background: #324057;
     position: absolute;
     top: 60px;
     bottom: 0px;
@@ -194,6 +196,9 @@
   aside {
     flex: 0 0 230px;
     width: 230px;
+  // position: absolute;
+  // top: 0px;
+  // bottom: 0px;
   .el-menu {
     height: 100%;
   }
@@ -224,9 +229,15 @@
   .content-container {
     background: #fff;
     flex: 1;
+  // position: absolute;
+  // right: 0px;
+  // top: 0px;
+  // bottom: 0px;
+  // left: 230px;
     overflow-y: scroll;
     padding: 20px;
   .breadcrumb-container {
+  //margin-bottom: 15px;
   .title {
     width: 200px;
     float: left;

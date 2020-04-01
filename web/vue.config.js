@@ -15,6 +15,16 @@ module.exports = {
       .set('components', resolve('src/components'))
   },
 
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `
+          @import "src/statics/css/vars.scss";
+        `
+      }
+    }
+  },
+
   // api请求基础路径
   publicPath: './',
   // 将js、css压缩

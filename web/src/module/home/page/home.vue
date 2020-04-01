@@ -115,7 +115,7 @@ console.log(this.$router.options.routes)
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
   .container {
     position: absolute;
@@ -125,7 +125,7 @@ console.log(this.$router.options.routes)
     .header {
       height: 60px;
       line-height: 60px;
-      background: #0660a3;
+      background: $color-primary;
       color: #fff;
       .userinfo {
         text-align: right;
@@ -144,6 +144,7 @@ console.log(this.$router.options.routes)
         }
       }
       .logo {
+        //width:230px;
         height: 60px;
         font-size: 22px;
         padding-left: 20px;
@@ -176,6 +177,7 @@ console.log(this.$router.options.routes)
     }
     .main {
       display: flex;
+      // background: #324057;
       position: absolute;
       top: 60px;
       bottom: 0px;
@@ -183,6 +185,9 @@ console.log(this.$router.options.routes)
       aside {
         flex: 0 0 230px;
         width: 230px;
+        // position: absolute;
+        // top: 0px;
+        // bottom: 0px;
         .el-menu {
           height: 100%;
         }
@@ -213,9 +218,15 @@ console.log(this.$router.options.routes)
       .content-container {
         background: #fff;
         flex: 1;
+        // position: absolute;
+        // right: 0px;
+        // top: 0px;
+        // bottom: 0px;
+        // left: 230px;
         overflow-y: scroll;
         padding: 20px;
         .breadcrumb-container {
+          //margin-bottom: 15px;
           .title {
             width: 200px;
             float: left;
