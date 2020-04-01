@@ -12,19 +12,21 @@ import io.swagger.annotations.ApiOperation;
  * @date 2020/3/31 17:31
  * @desc
  */
-@Api(value="cms页面管理接口")
+@Api(tags={"cms页面管理接口"})
 public interface PageControllerApi {
 
     /**
      * 查询列表
+     *
      * @param page
      * @param size
      * @param pageRequest
      * @return
      */
-    @ApiOperation("分页查询页面列表") @ApiImplicitParams({
-            @ApiImplicitParam(name="page",value = "页 码",required=true,paramType="path",dataType="int"),
-            @ApiImplicitParam(name="size",value = "每页记录 数",required=true,paramType="path",dataType="int")
+    @ApiOperation(value = "分页查询页面列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页 码", required = true, defaultValue = "1", paramType = "path", dataType = "int"),
+            @ApiImplicitParam(name = "size", value = "每页记录 数", required = true, paramType = "path", defaultValue = "10", dataType = "int")
     })
     QueryResponseResult findList(
             int page, int size, QueryPageRequest pageRequest
