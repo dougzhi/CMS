@@ -9,7 +9,7 @@ export const page_list = (page,size,params) => {
   //params为json格式
   //使用querystring将json对象转成key/value串
   let querys = querystring.stringify(params)
-  return http.requestQuickGet('/cms/page/list/'+page+'/'+size+'')
+  return http.requestQuickGet('/cms/page/list/'+page+'/'+size+'?' + querys)
 }
 /*页面添加*/
 export const page_add = params => {

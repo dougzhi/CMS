@@ -6,8 +6,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueRouter from 'vue-router'
 import routes from '../src/base/router'
 import store from '../src/vuex/store'
-import config from "./config/index";
-import axios from 'axios'
+// import axios from 'axios'
 
 // import { Message } from 'element-ui';
 // import utilApi from '../src/common/utils';
@@ -26,13 +25,6 @@ Vue.config.productionTip = false
 Vue.use(Vuex)
 
 Vue.use(VueRouter)
-
-const BaseURL = config.baseUrl
-const timeout = 90 * 1000
-debugger
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-axios.defaults.baseURL = BaseURL
-axios.defaults.timeout = timeout
 
 // Vue.use(vueResource);
 /* eslint-disable no-new */

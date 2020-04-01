@@ -62,15 +62,14 @@ module.exports = {
         target: 'http://127.0.0.1:7777'
 
       },
-      '/api/cms': {
-        target: 'http://localhost:31001/api/cms',
+      // 系统信息请求的远程服务
+      '/cms': {
+        target: 'http://localhost:31001/cms',
         changeOrigin: true,
         pathRewrite: {
-          '^/api/cms': ''
+          '^/cms': '/'
         }
-        //target: 'http://127.0.0.1:50201'
       },
-
       /*,
       '/ucenter': {
         // target: 'http://localhost:3000/mock/11'

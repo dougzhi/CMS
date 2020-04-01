@@ -5,10 +5,7 @@ import com.dongz.cms.service.PageService;
 import com.dongz.framework.domain.cms.request.QueryPageRequest;
 import com.dongz.framework.model.response.QueryResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author dong
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @desc
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/cms/page")
 public class PageController implements PageControllerApi{
 
