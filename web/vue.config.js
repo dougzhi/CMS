@@ -64,11 +64,13 @@ module.exports = {
       },
       // 系统信息请求的远程服务
       '/cms': {
-        target: 'http://localhost:31001/cms',
+        target: 'http://localhost:31001',
         changeOrigin: true,
+/*
         pathRewrite: {
           '^/cms': '/'
         }
+*/
       },
       /*,
       '/ucenter': {
