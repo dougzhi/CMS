@@ -35,4 +35,17 @@ public class PageController implements PageControllerApi{
         return pageService.add(cmsPage);
     }
 
+    @Override
+    @GetMapping("/get/{id}")
+    public CmsPage findById(@PathVariable("id") String id) {
+        return pageService.getById(id);
+    }
+
+    //这里使用put方法，http 方法中put表示更新
+    @Override
+    @PutMapping("/edit/{id}")
+    public CmsPageResult edit(@PathVariable("id") String id, @RequestBody CmsPage cmsPage) {
+        return pageService.update(id,cmsPage);
+    }
+
 }
