@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 /**
@@ -68,7 +69,7 @@ public class PageService {
     }
 
     //添加页面
-    public CmsPageResult add(CmsPage cmsPage){
+    public CmsPageResult add(@NotNull CmsPage cmsPage){
         //校验页面是否存在，根据页面名称、站点Id、页面webpath查询
         CmsPage cmsPage1 =
         pageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(),
@@ -108,6 +109,8 @@ public class PageService {
             one.setPageWebPath(cmsPage.getPageWebPath());
             //更新物理路径
             one.setPagePhysicalPath(cmsPage.getPagePhysicalPath());
+
+            one.setDataUrl(cmsPage.getDataUrl());
             //执行更新
             CmsPage save = pageRepository.save(one);
             if (save != null) {
