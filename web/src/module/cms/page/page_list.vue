@@ -10,8 +10,9 @@
             :value="item.siteId">
           </el-option>
         </el-select>
+        <el-input style="float: left; width: auto; margin-left: 10px" type="text" v-model="params.pageAliase" placeholder="请输入页面中文名称"/>
         <el-button style="float:left;" type="primary" v-on:click="query" size="small">查询</el-button>
-        <el-button style="float: left" v-on:click="params.siteId = null , query()" size="small">清空</el-button>
+        <el-button style="float: left" v-on:click="params = paramsInit , query()" size="small">清空</el-button>
 
         <router-link style="float: right" class="mui-tab-item" :to="{path:'/cms/page/add/',query:{
           page: this.page,
@@ -88,7 +89,12 @@
         page:1,//页码
         size:10,//每页显示个数
         params:{
-          siteId:''//站点id
+          siteId:'',//站点id
+          pageAliase:''//页面名称
+        },
+        paramsInit:{
+            siteId:'',//站点id
+            pageAliase:''//页面名称
         },
         listLoading:false,
         list:[],

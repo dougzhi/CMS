@@ -133,7 +133,7 @@
                   this.addLoading = false;
                   this.$message.error('提交失败');
                 }
-              });
+              }).finally(() => this.addLoading = false);
             });
           }
         });

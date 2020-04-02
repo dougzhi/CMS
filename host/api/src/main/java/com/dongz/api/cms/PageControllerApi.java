@@ -1,6 +1,8 @@
 package com.dongz.api.cms;
 
+import com.dongz.framework.domain.cms.CmsPage;
 import com.dongz.framework.domain.cms.request.QueryPageRequest;
+import com.dongz.framework.domain.cms.response.CmsPageResult;
 import com.dongz.framework.model.response.QueryResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -31,4 +33,7 @@ public interface PageControllerApi {
     QueryResponseResult findList(
             int page, int size, QueryPageRequest pageRequest
     );
+
+    @ApiOperation("添加页面")
+    CmsPageResult add(CmsPage cmsPage);
 }

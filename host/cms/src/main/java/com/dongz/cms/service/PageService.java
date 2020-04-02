@@ -3,6 +3,7 @@ package com.dongz.cms.service;
 import com.dongz.cms.dao.PageRepository;
 import com.dongz.framework.domain.cms.CmsPage;
 import com.dongz.framework.domain.cms.request.QueryPageRequest;
+import com.dongz.framework.domain.cms.response.CmsPageResult;
 import com.dongz.framework.model.response.CommonCode;
 import com.dongz.framework.model.response.QueryResponseResult;
 import com.dongz.framework.model.response.QueryResult;
@@ -59,6 +60,22 @@ public class PageService {
         cmsPageQueryResult.setTotal(all.getTotalElements());
         //返回结果
         return new QueryResponseResult(CommonCode.SUCCESS,cmsPageQueryResult);
+    }
+
+    //添加页面
+    public CmsPageResult add(CmsPage cmsPage){
+        //校验页面是否存在，根据页面名称、站点Id、页面webpath查询
+        CmsPage cmsPage1 =
+        pageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(),
+                cmsPage.getSiteId(), cmsPage.getPageWebPath());
+        if(cmsPage1 == null){
+            cmsPage.setPageId(null);//添加页面主键由spring data 自动生成
+            pageRepository.save(cmsPage);
+            //返回结果
+            CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS,cmsPage);
+            return cmsPageResult;
+        }
+        return new CmsPageResult(CommonCode.FAIL,null);
     }
 
 }
