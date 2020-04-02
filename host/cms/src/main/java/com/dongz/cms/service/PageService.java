@@ -3,10 +3,13 @@ package com.dongz.cms.service;
 import com.dongz.cms.dao.PageRepository;
 import com.dongz.framework.domain.cms.CmsPage;
 import com.dongz.framework.domain.cms.request.QueryPageRequest;
+import com.dongz.framework.domain.cms.response.CmsCode;
 import com.dongz.framework.domain.cms.response.CmsPageResult;
+import com.dongz.framework.exception.ExceptionCast;
 import com.dongz.framework.model.response.CommonCode;
 import com.dongz.framework.model.response.QueryResponseResult;
 import com.dongz.framework.model.response.QueryResult;
+import com.dongz.framework.model.response.ResponseResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -70,14 +73,14 @@ public class PageService {
         CmsPage cmsPage1 =
         pageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(),
                 cmsPage.getSiteId(), cmsPage.getPageWebPath());
-        if(cmsPage1 == null){
-            cmsPage.setPageId(null);//添加页面主键由spring data 自动生成
-            pageRepository.save(cmsPage);
-            //返回结果
-            CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS,cmsPage);
-            return cmsPageResult;
+        if(cmsPage1 !=null){ //校验页面是否存在，已存在则抛出异常
+            ExceptionCast.cast(CmsCode.CMS_ADDPAGE_EXISTS);
         }
-        return new CmsPageResult(CommonCode.FAIL,null);
+        cmsPage.setPageId(null);//添加页面主键由spring data 自动生成
+        pageRepository.save(cmsPage);
+        //返回结果
+        CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS,cmsPage);
+        return cmsPageResult;
     }
 
     //根据id查询页面
@@ -114,5 +117,16 @@ public class PageService {
         }
         //返回失败
         return new CmsPageResult(CommonCode.FAIL,null);
+    }
+
+    //删除页面
+    public ResponseResult delete(String id){
+        CmsPage one = this.getById(id);
+        if(one!=null){
+        //删除页面
+            pageRepository.deleteById(id);
+            return new ResponseResult(CommonCode.SUCCESS);
+        }
+        return new ResponseResult(CommonCode.FAIL);
     }
 }

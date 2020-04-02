@@ -4,6 +4,7 @@ import com.dongz.framework.domain.cms.CmsPage;
 import com.dongz.framework.domain.cms.request.QueryPageRequest;
 import com.dongz.framework.domain.cms.response.CmsPageResult;
 import com.dongz.framework.model.response.QueryResponseResult;
+import com.dongz.framework.model.response.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -38,7 +39,11 @@ public interface PageControllerApi {
     CmsPageResult add(CmsPage cmsPage);
 
     @ApiOperation("通过ID查询页面")
-    CmsPage findById(String id);
+    CmsPageResult findById(String id);
+
     @ApiOperation("修改页面")
     CmsPageResult edit(String id,CmsPage cmsPage);
+
+    @ApiOperation("通过ID删除页面")
+    ResponseResult delete(String id);
 }

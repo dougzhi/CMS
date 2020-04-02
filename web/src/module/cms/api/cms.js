@@ -17,7 +17,7 @@ export const page_add = params => {
 }
 /*页面修改*/
 export const page_edit = params => {
-  return http.requestPut('/cms/page/edit',params)
+  return http.requestPut('/cms/page/edit/' + params.pageId, params);
 }
 /*页面查询*/
 export const page_get = id => {

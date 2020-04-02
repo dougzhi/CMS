@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
  * @date 2020/3/31 22:44
  * @desc
  */
-@SpringBootApplication(scanBasePackages = {"com.dongz.api","com.dongz.cms"})
+@SpringBootApplication(scanBasePackages = {"com.dongz.api","com.dongz.cms","com.dongz.framework"})
 @EntityScan("com.dongz.framework.domain.cms")//扫描实体类
 public class CmsApplication {
 

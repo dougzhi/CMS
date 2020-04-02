@@ -5,7 +5,9 @@ import com.dongz.cms.service.PageService;
 import com.dongz.framework.domain.cms.CmsPage;
 import com.dongz.framework.domain.cms.request.QueryPageRequest;
 import com.dongz.framework.domain.cms.response.CmsPageResult;
+import com.dongz.framework.model.response.CommonCode;
 import com.dongz.framework.model.response.QueryResponseResult;
+import com.dongz.framework.model.response.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,8 +39,8 @@ public class PageController implements PageControllerApi{
 
     @Override
     @GetMapping("/get/{id}")
-    public CmsPage findById(@PathVariable("id") String id) {
-        return pageService.getById(id);
+    public CmsPageResult findById(@PathVariable("id") String id) {
+        return new CmsPageResult(CommonCode.SUCCESS, pageService.getById(id));
     }
 
     //这里使用put方法，http 方法中put表示更新
@@ -48,4 +50,9 @@ public class PageController implements PageControllerApi{
         return pageService.update(id,cmsPage);
     }
 
+    //使用http的delete方法完成岗位操作
+    @DeleteMapping("/del/{id}")
+    public ResponseResult delete(@PathVariable("id") String id) {
+       return pageService.delete(id);
+}
 }
