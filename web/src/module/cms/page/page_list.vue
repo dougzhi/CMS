@@ -84,7 +84,7 @@
     data(){
       return {
         page:1,//页码
-        size:2,//每页显示个数
+        size:10,//每页显示个数
         params:{
           siteId:''//站点id
         },
@@ -189,5 +189,7 @@
   }
 </script>
 <style>
-
+  .el-button {
+    margin-left: 10px;
+  }
 </style>
