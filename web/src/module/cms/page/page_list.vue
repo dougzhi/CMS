@@ -2,7 +2,7 @@
   <div>
       <!--查询表单-->
       <el-form :model="params">
-        <el-select v-model="params.siteId" placeholder="请选择站点">
+        <el-select style="float: left" v-model="params.siteId" placeholder="请选择站点">
           <el-option
             v-for="item in siteList"
             :key="item.siteId"
@@ -10,8 +10,10 @@
             :value="item.siteId">
           </el-option>
         </el-select>
-        <el-button type="primary" v-on:click="query" size="small">查询</el-button>
-        <router-link class="mui-tab-item" :to="{path:'/cms/page/add/',query:{
+        <el-button style="float:left;" type="primary" v-on:click="query" size="small">查询</el-button>
+        <el-button style="float: left" v-on:click="params.siteId = null , query()" size="small">清空</el-button>
+
+        <router-link style="float: right" class="mui-tab-item" :to="{path:'/cms/page/add/',query:{
           page: this.page,
           siteId: this.params.siteId}}">
           <el-button  type="primary" size="small">新增页面</el-button>
@@ -52,7 +54,7 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column label="静态化" width="80">
+        <el-table-column label="静态化" width="100">
           <template slot-scope="scope">
             <el-button
               size="small" type="primary" plain @click="generateHtml(scope.row.pageId)">静态化
@@ -191,5 +193,7 @@
 <style>
   .el-button {
     margin-left: 10px;
+    height: 40px;
+    font-size: 14px;
   }
 </style>

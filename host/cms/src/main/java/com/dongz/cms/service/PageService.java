@@ -6,10 +6,9 @@ import com.dongz.framework.domain.cms.request.QueryPageRequest;
 import com.dongz.framework.model.response.CommonCode;
 import com.dongz.framework.model.response.QueryResponseResult;
 import com.dongz.framework.model.response.QueryResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,19 +29,31 @@ public class PageService {
      * @param queryPageRequest 查询条件 * @return 页面列表
      */
     public QueryResponseResult findList(int page, int size, QueryPageRequest queryPageRequest){
-        if (queryPageRequest == null) {
-            queryPageRequest = new QueryPageRequest();
+        //条件匹配器
+        //页面名称模糊查询，需要自定义字符串的匹配器实现模糊查询
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+                .withMatcher("pageAliase", ExampleMatcher.GenericPropertyMatchers.contains());
+        //条件值
+        CmsPage cmsPage = new CmsPage();
+        //站点ID
+        if(StringUtils.isNotEmpty(queryPageRequest.getSiteId())){
+            cmsPage.setSiteId(queryPageRequest.getSiteId());
         }
-        if (page <= 0) {
-            page = 1;
+        //页面别名
+        if(StringUtils.isNotEmpty(queryPageRequest.getPageAliase())){
+           cmsPage.setPageAliase(queryPageRequest.getPageAliase());
         }
-        page = page - 1;//为了适应mongodb的接口将页码减1
-        if (size <= 0) {
-        size = 20; }
+        //创建条件实例
+        Example<CmsPage> example = Example.of(cmsPage, exampleMatcher);
+        //页码
+        page = page - 1;
+        if (size < 0) {
+            size = 10;
+        }
         //分页对象
         Pageable pageable = PageRequest.of(page, size);
         //分页查询
-        Page<CmsPage> all = pageRepository.findAll(pageable);
+        Page<CmsPage> all = pageRepository.findAll(example,pageable);
         QueryResult<CmsPage> cmsPageQueryResult = new QueryResult<>();
         cmsPageQueryResult.setList(all.getContent());
         cmsPageQueryResult.setTotal(all.getTotalElements());

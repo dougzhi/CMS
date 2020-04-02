@@ -1,4 +1,4 @@
-package com.dongz.cms.web.controller;
+package com.dongz.cms.controller.web;
 
 import com.dongz.api.cms.PageControllerApi;
 import com.dongz.cms.service.PageService;
