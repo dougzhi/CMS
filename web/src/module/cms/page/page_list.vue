@@ -36,33 +36,22 @@
         </el-table-column>
         <el-table-column prop="pageCreateTime" label="创建时间" width="180" :formatter="formatCreatetime">
         </el-table-column>
-        <el-table-column label="编辑" width="80">
+        <el-table-column label="操作" width="450">
           <template slot-scope="scope">
             <el-button
               size="small"type="primary"
               @click="edit(scope.row.pageId)">编辑
             </el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="删除" width="80">
-          <template slot-scope="scope">
-
             <el-button
               size="mini"
               type="danger"
               @click="del(scope.$index, scope.row)">删除
             </el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="静态化" width="100">
-          <template slot-scope="scope">
             <el-button
               size="small" type="primary" plain @click="generateHtml(scope.row.pageId)">静态化
             </el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="发布" width="80">
-          <template slot-scope="scope">
+            <el-button
+              size="small" type="primary" plain @click="preview(scope.row.pageId)">页面预览</el-button>
             <el-button
               size="small" type="primary" plain @click="postPage(scope.row.pageId)">发布
             </el-button>
@@ -168,7 +157,11 @@
           this.total = res.queryResult.total
           this.list = res.queryResult.list
         })
-      }
+      },
+      //页面预览
+      preview(pageId){
+        window.open("http://www.dongz.com/cms/preview/"+pageId)
+      },
     },
     created(){
         //存储 请求参数
