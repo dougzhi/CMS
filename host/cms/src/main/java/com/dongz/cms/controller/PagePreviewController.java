@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.ServletOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author dong
@@ -28,7 +29,7 @@ public class PagePreviewController extends BaseController {
         if(StringUtils.isNotEmpty(pageHtml)){
             try {
                 ServletOutputStream outputStream = response.getOutputStream();
-                outputStream.write(pageHtml.getBytes("utf‐8"));
+                outputStream.write(pageHtml.getBytes(StandardCharsets.UTF_8));
             } catch (IOException e) {
                 e.printStackTrace();
             }

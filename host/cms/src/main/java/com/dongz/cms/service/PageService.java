@@ -33,6 +33,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
 
@@ -172,12 +173,14 @@ public class PageService {
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_DATAISNULL);
         }
         //获取页面模板
-        String templateContent = getTemplateByPageId(pageId); if(StringUtils.isEmpty(templateContent)){
+        String templateContent = getTemplateByPageId(pageId);
+        if(StringUtils.isEmpty(templateContent)){
         //页面模板为空
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
         }
         //执行静态化
-        String html = generateHtml(templateContent, model); if(StringUtils.isEmpty(html)){
+        String html = generateHtml(templateContent, model);
+        if(StringUtils.isEmpty(html)){
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_HTMLISNULL);
         }
         return html;
@@ -210,7 +213,8 @@ public class PageService {
             ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);
         }
         //页面模板
-        String templateId = cmsPage.getTemplateId(); if(StringUtils.isEmpty(templateId)){
+        String templateId = cmsPage.getTemplateId();
+        if(StringUtils.isEmpty(templateId)){
             //页面模板为空
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
         }
@@ -226,7 +230,7 @@ public class PageService {
             //创建GridFsResource
             GridFsResource gridFsResource = new GridFsResource(gridFSFile,gridFSDownloadStream);
             try {
-                String content = IOUtils.toString(gridFsResource.getInputStream(), "utf‐8");
+                String content = IOUtils.toString(gridFsResource.getInputStream(), StandardCharsets.UTF_8);
                 return content;
             } catch (IOException e) {
                 e.printStackTrace();
