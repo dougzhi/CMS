@@ -2,7 +2,7 @@
     font-family: MuiiconSpread;
     font-weight: normal;
     font-style: normal;
-    src:  url('src/statics/mui/fonts/mui-icons-extra.ttf') format('truetype'); /* iOS 4.1- */
+    src:  url('cms/src/statics/mui/fonts/mui-icons-extra.ttf') format('truetype'); /* iOS 4.1- */
 }
 .mui-icon-extra
 {

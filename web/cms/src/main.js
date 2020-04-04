@@ -4,8 +4,8 @@ import App from './App.vue'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueRouter from 'vue-router'
-import routes from '../src/base/router'
-import store from '../src/vuex/store'
+import routes from './base/router'
+import store from './vuex/store'
 
 // import { Message } from 'element-ui';
 // import utilApi from '../src/common/utils';
