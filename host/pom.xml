@@ -9,6 +9,7 @@
         <module>common</module>
         <module>model</module>
         <module>utils</module>
+        <module>cms_client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

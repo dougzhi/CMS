@@ -1,5 +1,7 @@
 package com.dongz.cms.service;
 
+import com.alibaba.fastjson.JSON;
+import com.dongz.cms.config.RabbitmqConfig;
 import com.dongz.cms.dao.PageRepository;
 import com.dongz.cms.dao.TemplateRepository;
 import com.dongz.framework.domain.cms.CmsPage;
@@ -20,6 +22,8 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -33,7 +37,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -59,6 +65,9 @@ public class PageService {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
 
     /**
      * 页面列表分页查询
@@ -254,5 +263,53 @@ public class PageService {
         ResponseEntity<Map> forEntity = restTemplate.getForEntity(dataUrl, Map.class);
         Map body = forEntity.getBody();
         return body;
+    }
+
+    //页面发布
+    public ResponseResult postPage(String pageId){
+        //执行静态化
+        String pageHtml = this.getPageHtml(pageId); if(StringUtils.isEmpty(pageHtml)){
+            ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_HTMLISNULL);
+        }
+        //保存静态化文件
+        saveHtml(pageId, pageHtml);
+        //发送消息
+        sendPostPage(pageId);
+        return new ResponseResult(CommonCode.SUCCESS);
+    }
+
+    //发送页面发布消息
+    private void sendPostPage(String pageId){
+        CmsPage cmsPage = this.getById(pageId);
+        if(cmsPage == null){
+            ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);
+        }
+        Map<String,String> msgMap = new HashMap<>(); msgMap.put("pageId",pageId);
+        //消息内容
+        String msg = JSON.toJSONString(msgMap);
+        //获取站点id作为routingKey
+        String siteId = cmsPage.getSiteId();
+        //发布消息
+        this.rabbitTemplate.convertAndSend(RabbitmqConfig.EX_ROUTING_CMS_POSTPAGE,siteId, msg);
+    }
+    //保存静态页面内容
+    private void saveHtml(String pageId, String content){
+        //查询页面
+        Optional<CmsPage> optional = pageRepository.findById(pageId); if(!optional.isPresent()){
+            ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);
+        }
+        //存储之前先删除
+        CmsPage cmsPage = optional.get();
+        String htmlFileId = cmsPage.getHtmlFileId(); if(StringUtils.isNotEmpty(htmlFileId)){
+            gridFsTemplate.delete(Query.query(Criteria.where("_id").is(htmlFileId)));
+        }
+        //保存html文件到GridFS
+        InputStream inputStream = IOUtils.toInputStream(content, StandardCharsets.UTF_8);
+        ObjectId objectId = gridFsTemplate.store(inputStream, cmsPage.getPageName());
+        //文件id
+        String fileId = objectId.toString();
+        //将文件id存储到cmspage中
+        cmsPage.setHtmlFileId(fileId);
+        pageRepository.save(cmsPage);
     }
 }

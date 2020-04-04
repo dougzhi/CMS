@@ -51,8 +51,16 @@ public class PageController implements PageControllerApi{
     }
 
     //使用http的delete方法完成岗位操作
+    @Override
     @DeleteMapping("/del/{id}")
     public ResponseResult delete(@PathVariable("id") String id) {
        return pageService.delete(id);
 }
+
+    @Override
+    @PostMapping("/postPage/{pageId}")
+    public ResponseResult post(@PathVariable("pageId") String pageId) {
+        return pageService.postPage(pageId);
+    }
+
 }
