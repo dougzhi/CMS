@@ -3,7 +3,7 @@
     <el-row >
       <el-col :span="8"  :offset=2 >
         <el-card :body-style="{ padding: '10px' }">
-          <img src="/static/images/add.jpg" class="image" height="150px">
+          <img :src="addImg" class="image" height="150px">
           <div style="padding: 10px;">
             <span>课程名称</span>
             <div class="bottom clearfix">
@@ -41,11 +41,14 @@
 <script>
   import * as courseApi from '../api/course';
   import utilApi from '../../../common/utils';
+  import add from "@/statics/images/add.jpg";
+
   let config = require('@/./config/index')
   export default {
     data() {
       return {
         page:1,
+        addImg: add,
         size:7,
         total: 0,
         courses: [

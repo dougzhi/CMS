@@ -7,6 +7,7 @@
       mode="horizontal"
       background-color="#eee"
       text-color="#000"
+      style="margin-bottom: 20px"
       router
       active-text-color="#000">
       <el-menu-item index="1" :route="{path:'/course/manage/summary/'+this.courseid}">课程首页</el-menu-item>

@@ -13,7 +13,7 @@ import lombok.ToString;
 @Data
 @ToString
 @NoArgsConstructor
-public class ResponseResult implements Response {
+public class ResponseResult<T> implements Response<T> {
 
     //操作是否成功
     boolean success = SUCCESS;
