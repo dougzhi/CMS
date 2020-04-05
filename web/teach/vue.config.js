@@ -62,6 +62,12 @@ module.exports = {
         target: 'http://127.0.0.1:7777'
 
       },
+      '/course': {
+        // target: 'http://localhost:3000/mock/11'
+        //target: 'http://127.0.0.1:31200'
+        target: 'http://127.0.0.1:31200'
+
+      },
       // 系统信息请求的远程服务
       '/cms': {
         target: 'http://localhost:31001',
@@ -80,12 +86,6 @@ module.exports = {
 
       },
       '/auth': {
-        // target: 'http://localhost:3000/mock/11'
-        //target: 'http://127.0.0.1:31200'
-        target: 'http://127.0.0.1:50201/api'
-
-      },
-      '/course': {
         // target: 'http://localhost:3000/mock/11'
         //target: 'http://127.0.0.1:31200'
         target: 'http://127.0.0.1:50201/api'

@@ -24,7 +24,7 @@ import java.util.Map;
 public class CouseController extends BaseController implements CourseControllerApi {
 
     @Override
-    @GetMapping("/courseBase/list/{page}/{size}")
+    @GetMapping("/base/list/{page}/{size}")
     public QueryResponseResult<CourseInfo> findCourseList(
             @PathVariable int page,@PathVariable int size,
           CourseListRequest courseListRequest) {
