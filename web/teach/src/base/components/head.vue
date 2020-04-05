@@ -136,7 +136,7 @@
   .header {
     height: 60px;
     line-height: 60px;
-    //background: $color-primary;
+    background: $color-primary;
     color: #fff;
   .userinfo {
     text-align: right;
