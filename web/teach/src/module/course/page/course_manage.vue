@@ -7,28 +7,15 @@
       mode="horizontal"
       background-color="#eee"
       text-color="#000"
+      router
       active-text-color="#000">
-      <router-link class="mui-tab-item" :to="{path:'/course/manage/summary/'+this.courseid}">
-      <el-menu-item index="1">课程首页</el-menu-item>
-      </router-link>
-      <router-link class="mui-tab-item" :to="{path:'/course/manage/baseinfo/'+this.courseid}">
-      <el-menu-item index="2">基本信息</el-menu-item>
-      </router-link>
-      <router-link class="mui-tab-item" :to="{path:'/course/manage/picture/'+this.courseid}">
-        <el-menu-item index="3">课程图片</el-menu-item>
-      </router-link>
-      <router-link class="mui-tab-item" :to="{path:'/course/manage/marketinfo/'+this.courseid}">
-      <el-menu-item index="4">课程营销</el-menu-item>
-      </router-link>
-      <router-link class="mui-tab-item" :to="{path:'/course/manage/plan/'+this.courseid}">
-      <el-menu-item index="5">课程计划</el-menu-item>
-      </router-link>
-      <router-link class="mui-tab-item" :to="{path:'/course/manage/teacher/'+this.courseid}">
-        <el-menu-item index="6">教师信息</el-menu-item>
-      </router-link>
-      <router-link class="mui-tab-item" :to="{path:'/course/manage/pub/'+this.courseid}">
-        <el-menu-item index="7">发布课程</el-menu-item>
-      </router-link>
+      <el-menu-item index="1" :route="{path:'/course/manage/summary/'+this.courseid}">课程首页</el-menu-item>
+      <el-menu-item index="2" :route="{path:'/course/manage/baseinfo/'+this.courseid}">基本信息</el-menu-item>
+      <el-menu-item index="3" :route="{path:'/course/manage/picture/'+this.courseid}">课程图片</el-menu-item>
+      <el-menu-item index="4" :route="{path:'/course/manage/marketinfo/'+this.courseid}">课程营销</el-menu-item>
+      <el-menu-item index="5" :route="{path:'/course/manage/plan/'+this.courseid}">课程计划</el-menu-item>
+      <el-menu-item index="6" :route="{path:'/course/manage/teacher/'+this.courseid}">教师信息</el-menu-item>
+      <el-menu-item index="7" :route="{path:'/course/manage/pub/'+this.courseid}">发布课程</el-menu-item>
     </el-menu>
     <router-view class="main"></router-view>
   </div>
