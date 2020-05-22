@@ -11,6 +11,7 @@
         <module>utils</module>
         <module>cms_client</module>
         <module>course_manage</module>
+        <module>manage_center</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
